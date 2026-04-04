@@ -26,7 +26,7 @@ public class Pokemon
 
     [Required]
     public int MaxHP { get; set; }
-    
+
     [Required]
-    public int CurrentHP { get; set; }
+    public List<Move> Moves { get; set; }
 }
