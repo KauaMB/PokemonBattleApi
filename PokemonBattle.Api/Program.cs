@@ -15,7 +15,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddHttpClient<IPokeApiService, PokeApiService>(client =>
 {
-    client.BaseAddress = (new Uri(builder.Configuration["PokeApi:BaseURL"]));
+    client.BaseAddress = new Uri(builder.Configuration["PokeApi:BaseURL"]);
 });
 
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite("Data Source = PokeBattle.db"));
