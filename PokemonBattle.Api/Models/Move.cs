@@ -13,7 +13,7 @@ public class Move
     public string Name { get; set; }
 
     [Required]
-    public PokemonTypes Type { get; set; }
+    public TypesEnum Type { get; set; }
 
     [Required]
     public int Power { get; set; }

@@ -7,26 +7,18 @@ namespace PokemonBattle.Api.Models;
 
 public class Pokemon
 {
-    [Required]
     public int Id { get; set; }
 
-    [Required]
     public string Name { get; set; }
 
-    [Required]
-    public PokemonTypes Type { get; set; }
-
-    public PokemonTypes? SecondType { get; set; }
-
-    [Required]
-    public int Attack { get; set; }
-
-    [Required]
-    public int Defense { get; set; }
-
-    [Required]
     public int MaxHP { get; set; }
 
-    [Required]
-    public List<Move> Moves { get; set; }
+    public int Attack { get; set; }
+
+    public int Defense { get; set; }
+
+    public List<TypesEnum> Types { get; set; }
+
+    // [Required]
+    // public List<Move> Moves { get; set; }
 }

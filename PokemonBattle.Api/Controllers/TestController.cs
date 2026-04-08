@@ -30,11 +30,11 @@ namespace PokemonBattle.Api.Controllers
             return Ok();
         }
 
-        [HttpGet]
-        public ActionResult get()
-        {
-            return Ok(PokeDb.Pokemons.Include(p => p.Moves).ToList());
-        }
+        // [HttpGet]
+        // public ActionResult get()
+        // {
+        //     return Ok(PokeDb.Pokemons.Include(p => p.Moves).ToList());
+        // }
         
         [HttpGet("from-api")]
         public async Task<ActionResult<List<PokemonDto>>> getFromApi()
