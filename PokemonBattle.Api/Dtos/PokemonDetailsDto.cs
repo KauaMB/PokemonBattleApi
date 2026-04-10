@@ -15,6 +15,7 @@ public class PokemonDetailsDto
     //nested
     public List<Stats> Stats { get; set; }
     public List<PokemonTypes> Types { get; set; }
+    public List<MovesList> Moves { get; set; }
 }
 
 
@@ -41,6 +42,18 @@ public class PokemonTypes
 }
 
 public class PokemonTypeDto
+{
+    public string Name { get; set; }
+}
+
+//Moves classes
+public class MovesList
+{
+    [JsonPropertyName("move")]
+    public MoveName MoveNameClass { get; set; }
+}
+
+public class MoveName
 {
     public string Name { get; set; }
 }

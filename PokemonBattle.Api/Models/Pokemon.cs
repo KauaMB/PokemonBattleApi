@@ -19,6 +19,5 @@ public class Pokemon
 
     public List<TypesEnum> Types { get; set; }
 
-    // [Required]
-    // public List<Move> Moves { get; set; }
+    public List<Move> Moves { get; set; }
 }

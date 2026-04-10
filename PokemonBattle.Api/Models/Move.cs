@@ -6,18 +6,15 @@ namespace PokemonBattle.Api.Models;
 
 public class Move
 {
-    [Required]
     public int Id { get; set; }
 
-    [Required]
     public string Name { get; set; }
 
-    [Required]
     public TypesEnum Type { get; set; }
 
-    [Required]
     public int Power { get; set; }
     
-    [Required]
     public int Accuracy { get; set; }
+
+    public List<Pokemon> LearnedBy { get; set; }
 }

@@ -1,5 +1,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
+using PokemonBattle.Api.Enums;
 using PokemonBattle.Api.Models;
 
 namespace PokemonBattle.Api.Database;
@@ -11,7 +12,19 @@ public class ApplicationDbContext : DbContext
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
-        
+
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Pokemon>()
+         .Property(p => p.Types)
+         .HasConversion(
+             v => string.Join(",", v), // Transforma a Lista em "Fogo,Voador"
+             v => v.Split(',', StringSplitOptions.RemoveEmptyEntries)
+                   .Select(s => (TypesEnum)Enum.Parse(typeof(TypesEnum), s))
+                   .ToList()
+                   ); // Transforma de volta em Lista
     }
 
 }

@@ -16,6 +16,21 @@ namespace PokemonBattle.Api.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.5");
 
+            modelBuilder.Entity("MovePokemon", b =>
+                {
+                    b.Property<int>("LearnedById")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MovesId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("LearnedById", "MovesId");
+
+                    b.HasIndex("MovesId");
+
+                    b.ToTable("MovePokemon");
+                });
+
             modelBuilder.Entity("PokemonBattle.Api.Models.Move", b =>
                 {
                     b.Property<int>("Id")
@@ -29,9 +44,6 @@ namespace PokemonBattle.Api.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("PokemonId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("Power")
                         .HasColumnType("INTEGER");
 
@@ -39,8 +51,6 @@ namespace PokemonBattle.Api.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PokemonId");
 
                     b.ToTable("Moves");
                 });
@@ -64,27 +74,28 @@ namespace PokemonBattle.Api.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("SecondType")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Types")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
                     b.ToTable("Pokemons");
                 });
 
-            modelBuilder.Entity("PokemonBattle.Api.Models.Move", b =>
+            modelBuilder.Entity("MovePokemon", b =>
                 {
                     b.HasOne("PokemonBattle.Api.Models.Pokemon", null)
-                        .WithMany("Moves")
-                        .HasForeignKey("PokemonId");
-                });
+                        .WithMany()
+                        .HasForeignKey("LearnedById")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-            modelBuilder.Entity("PokemonBattle.Api.Models.Pokemon", b =>
-                {
-                    b.Navigation("Moves");
+                    b.HasOne("PokemonBattle.Api.Models.Move", null)
+                        .WithMany()
+                        .HasForeignKey("MovesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

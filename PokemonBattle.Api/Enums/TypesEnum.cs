@@ -4,7 +4,7 @@ public enum TypesEnum
 {
     Bug = 0,
     Dragon = 1, 
-    Eletric = 2,
+    Electric = 2,
     Fighting = 3,
     Fire = 4,
     Flying = 5,
@@ -16,5 +16,6 @@ public enum TypesEnum
     Poison = 11,
     Psychic = 12,
     Rock = 13,
-    Water = 14
+    Water = 14,
+    Fairy = 15
 }

@@ -5,5 +5,5 @@ namespace PokemonBattle.Api.Services;
 
 public interface IPokeApiService
 {
-    Task<List<Pokemon>> GetPokemon();
+    Task<int> GetPokemon();
 }
