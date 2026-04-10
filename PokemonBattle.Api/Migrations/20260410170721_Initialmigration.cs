@@ -5,7 +5,7 @@
 namespace PokemonBattle.Api.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class Initialmigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,9 +17,10 @@ namespace PokemonBattle.Api.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Type = table.Column<int>(type: "INTEGER", nullable: false),
-                    Power = table.Column<int>(type: "INTEGER", nullable: false),
-                    Accuracy = table.Column<int>(type: "INTEGER", nullable: false)
+                    Type = table.Column<string>(type: "TEXT", nullable: false),
+                    Power = table.Column<int>(type: "INTEGER", nullable: true),
+                    Accuracy = table.Column<int>(type: "INTEGER", nullable: true),
+                    _damageClass = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -36,6 +37,9 @@ namespace PokemonBattle.Api.Migrations
                     MaxHP = table.Column<int>(type: "INTEGER", nullable: false),
                     Attack = table.Column<int>(type: "INTEGER", nullable: false),
                     Defense = table.Column<int>(type: "INTEGER", nullable: false),
+                    SpecialAttack = table.Column<int>(type: "INTEGER", nullable: false),
+                    SpecialDefense = table.Column<int>(type: "INTEGER", nullable: false),
+                    Speed = table.Column<int>(type: "INTEGER", nullable: false),
                     Types = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>

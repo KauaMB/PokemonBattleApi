@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PokemonBattle.Api.Database;
 using PokemonBattle.Api.Dtos;
 using PokemonBattle.Api.Enums;
@@ -51,9 +53,12 @@ public class PokeApiService : IPokeApiService
                 Attack = detailResponse.Stats.Find(x => x.StatName.Name == "attack")?.StatValue ?? 0,
                 Defense = detailResponse.Stats.Find(x => x.StatName.Name == "defense")?.StatValue ?? 0,
                 MaxHP = detailResponse.Stats.Find(x => x.StatName.Name == "hp")?.StatValue ?? 0,
+                SpecialAttack = detailResponse.Stats.Find(x => x.StatName.Name == "special-attack")?.StatValue ?? 0,
+                SpecialDefense = detailResponse.Stats.Find(x => x.StatName.Name == "special-defense")?.StatValue ?? 0,
+                Speed = detailResponse.Stats.Find(x => x.StatName.Name == "speed")?.StatValue ?? 0,
 
                 Types = parsedTypes,
-                Moves = new List<Move>()          
+                Moves = new List<Move>()
             };
 
             foreach (var move in detailResponse.Moves)
@@ -62,12 +67,12 @@ public class PokeApiService : IPokeApiService
 
                 if (!AddedMoves.ContainsKey(MoveName))
                 {
-                    AddedMoves.Add(MoveName, new Move{Name = MoveName});
+                    AddedMoves.Add(MoveName, new Move { Name = MoveName });
                 }
 
                 definitivePokemon.Moves.Add(AddedMoves[MoveName]);
             }
-            
+
             DetailedPokemons.Add(definitivePokemon);
         }
 
@@ -79,5 +84,32 @@ public class PokeApiService : IPokeApiService
 
     }
 
+    public async Task<int> GetMoves()
+    {
+        var moves = await _dbContext.Moves.ToListAsync();
+        int howManyChanged = 0;
+
+        foreach (var move in moves)
+        {
+            MoveDetailsDto? moveDetails = await _httpClient.GetFromJsonAsync<MoveDetailsDto>($"move/{move.Name}");
+
+            if (moveDetails != null)
+            {
+                Enum.TryParse<TypesEnum>(moveDetails.Type.name, true, out var parsedType);
+                Enum.TryParse<DamageClass>(moveDetails._damageClass.name, true, out var parsedDamageClass);
+
+                move.Power = moveDetails?.Power ?? 0;
+                move.Accuracy = moveDetails?.Accuracy ?? 0;
+                move.Type = parsedType;
+                move._damageClass = parsedDamageClass;
+
+                howManyChanged++;
+            }
+        }
+
+        await _dbContext.SaveChangesAsync();
+
+        return howManyChanged;
+    }
 
 }

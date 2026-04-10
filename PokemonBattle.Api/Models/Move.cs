@@ -12,9 +12,11 @@ public class Move
 
     public TypesEnum Type { get; set; }
 
-    public int Power { get; set; }
+    public int? Power { get; set; }
     
-    public int Accuracy { get; set; }
+    public int? Accuracy { get; set; }
+
+    public DamageClass _damageClass { get; set; }
 
     public List<Pokemon> LearnedBy { get; set; }
 }

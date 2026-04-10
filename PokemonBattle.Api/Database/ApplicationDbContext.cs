@@ -20,11 +20,15 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<Pokemon>()
          .Property(p => p.Types)
          .HasConversion(
-             v => string.Join(",", v), // Transforma a Lista em "Fogo,Voador"
+             v => string.Join(",", v),
              v => v.Split(',', StringSplitOptions.RemoveEmptyEntries)
                    .Select(s => (TypesEnum)Enum.Parse(typeof(TypesEnum), s))
-                   .ToList()
-                   ); // Transforma de volta em Lista
+                   .ToList());
+            
+        modelBuilder.Entity<Move>().Property(m => m.Type)
+                                    .HasConversion<string>();
+        modelBuilder.Entity<Move>().Property(m => m._damageClass)
+                                    .HasConversion<string>();
     }
 
 }

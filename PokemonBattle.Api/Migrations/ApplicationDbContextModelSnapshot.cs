@@ -37,18 +37,23 @@ namespace PokemonBattle.Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Accuracy")
+                    b.Property<int?>("Accuracy")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Power")
+                    b.Property<int?>("Power")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Type")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("_damageClass")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -73,6 +78,15 @@ namespace PokemonBattle.Api.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("SpecialAttack")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("SpecialDefense")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Speed")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Types")
                         .IsRequired()

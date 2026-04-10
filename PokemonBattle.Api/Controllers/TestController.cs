@@ -30,6 +30,20 @@ namespace PokemonBattle.Api.Controllers
             return Ok();
         }
 
+        [HttpPost("reset")]
+    public async Task<IActionResult> ResetDatabase()
+    {
+        // 1. Deleta o banco de dados se ele existir
+        await PokeDb.Database.EnsureDeletedAsync();
+
+        // 2. Cria o banco de dados do zero com base nas suas Entities
+        // Nota: Isso cria as tabelas mas NÃO aplica o histórico de migrations.
+        // Para ambiente de teste, é perfeito.
+        await PokeDb.Database.EnsureCreatedAsync();
+
+        return Ok("Banco de dados explodido e recriado com sucesso! 🚀");
+    }
+
         // [HttpGet]
         // public ActionResult get()
         // {
@@ -39,8 +53,9 @@ namespace PokemonBattle.Api.Controllers
         [HttpGet("from-api")]
         public async Task<ActionResult<List<PokemonDto>>> getFromApi()
         {
-            var requestResponse = await _pokeApiService.GetPokemon();
-            return Ok(requestResponse);
+            var requestPokemonResponse = await _pokeApiService.GetPokemon();
+            var requestMoveResponse = await _pokeApiService.GetMoves();
+            return Ok($"Got {requestPokemonResponse} Pokemons \nUpdated {requestMoveResponse} Moves");
         }
     }
 }
