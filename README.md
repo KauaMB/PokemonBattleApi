@@ -6,4 +6,4 @@ Project to practice OOP and Architecture in .NET 8.
 
 [ ] Implement the damage calculation logic (Polymorphism).
 
-[ ] Save results in SQLite.
+[x] Save results in SQLite.
