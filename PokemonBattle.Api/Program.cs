@@ -18,6 +18,8 @@ builder.Services.AddHttpClient<IPokeApiService, PokeApiService>(client =>
     client.BaseAddress = new Uri(builder.Configuration["PokeApi:BaseURL"]);
 });
 
+builder.Services.AddScoped<IPokemonService, PokemonService>();
+
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite("Data Source = PokeBattle.db"));
 
 var app = builder.Build();

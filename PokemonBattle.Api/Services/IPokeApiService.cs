@@ -7,5 +7,5 @@ public interface IPokeApiService
 {
     Task<int> GetPokemon();
 
-    // Task<int> GetMoves();
+    Task<int> GetMoves();
 }
