@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments;
 using PokemonBattle.Api.Database;
 using PokemonBattle.Api.Dtos;
+using PokemonBattle.Api.Enums;
 using PokemonBattle.Api.Models;
 
 namespace PokemonBattle.Api.Services;
@@ -44,11 +45,15 @@ public class PokemonService : IPokemonService
             SpecialDefense = pokemon.SpecialDefense,
             Speed = pokemon.Speed,
 
+            Types = pokemon.Types.Select(x => x.ToString()).ToList(),
+
            Moves = pokemon.Moves.Select(m => new MoveDataDto
            {
                MoveName = m.Name,
                MoveId = m.Id,
                MovePower = m.Power ?? 0,
+               MoveAccuracy = m.Accuracy ?? 0,
+               MoveType = m.Type.ToString(),
                MoveDamageClass = m._damageClass.ToString()
            }).ToList()
         };

@@ -57,13 +57,13 @@ public class PokeApiService : IPokeApiService
                 SpecialDefense = detailResponse.Stats.Find(x => x.StatName.Name == "special-defense")?.StatValue ?? 0,
                 Speed = detailResponse.Stats.Find(x => x.StatName.Name == "speed")?.StatValue ?? 0,
 
-                Types = parsedTypes,
-                Moves = new List<Move>()
+                Types = parsedTypes
             };
 
             foreach (var move in detailResponse.Moves)
             {
                 var MoveName = move.MoveNameClass.Name;
+
 
                 if (!AddedMoves.ContainsKey(MoveName))
                 {
@@ -95,6 +95,13 @@ public class PokeApiService : IPokeApiService
 
             if (moveDetails != null)
             {
+                if (moveDetails._damageClass.name == "status")
+                {
+                    _dbContext.Moves.Remove(move);
+                    await _dbContext.SaveChangesAsync();
+                    continue;
+                }
+
                 Enum.TryParse<TypesEnum>(moveDetails.Type.name, true, out var parsedType);
                 Enum.TryParse<DamageClass>(moveDetails._damageClass.name, true, out var parsedDamageClass);
 
