@@ -54,7 +54,7 @@ public class PokemonService : IPokemonService
                MovePower = m.Power ?? 0,
                MoveAccuracy = m.Accuracy ?? 0,
                MoveType = m.Type.ToString(),
-               MoveDamageClass = m._damageClass.ToString()
+               MoveDamageClass = m._damageClass
            }).ToList()
         };
     }

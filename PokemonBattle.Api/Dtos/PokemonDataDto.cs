@@ -1,4 +1,5 @@
 using System;
+using PokemonBattle.Api.Enums;
 
 namespace PokemonBattle.Api.Dtos;
 
@@ -24,5 +25,5 @@ public class MoveDataDto
     public int MovePower { get; set; }
     public int MoveAccuracy { get; set; }
     public string MoveType { get; set; }
-    public string MoveDamageClass { get; set; }
+    public DamageClass MoveDamageClass { get; set; }
 }
