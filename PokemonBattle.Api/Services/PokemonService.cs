@@ -45,7 +45,7 @@ public class PokemonService : IPokemonService
             SpecialDefense = pokemon.SpecialDefense,
             Speed = pokemon.Speed,
 
-            Types = pokemon.Types.Select(x => x.ToString()).ToList(),
+            Types = pokemon.Types,
 
            Moves = pokemon.Moves.Select(m => new MoveDataDto
            {
@@ -53,7 +53,7 @@ public class PokemonService : IPokemonService
                MoveId = m.Id,
                MovePower = m.Power ?? 0,
                MoveAccuracy = m.Accuracy ?? 0,
-               MoveType = m.Type.ToString(),
+               MoveType = m.Type,
                MoveDamageClass = m._damageClass
            }).ToList()
         };

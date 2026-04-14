@@ -20,6 +20,8 @@ builder.Services.AddHttpClient<IPokeApiService, PokeApiService>(client =>
 
 builder.Services.AddScoped<IPokemonService, PokemonService>();
 
+builder.Services.AddScoped<IBattleService, BattleService>();
+
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite("Data Source = PokeBattle.db"));
 
 var app = builder.Build();

@@ -14,7 +14,7 @@ public class PokemonDataDto
     public int SpecialDefense { get; set; }
     public int Speed { get; set; }
 
-    public List<string> Types { get; set; } = new();
+    public List<TypesEnum> Types { get; set; } = new();
     public List<MoveDataDto> Moves { get; set; } = new();
 }
 
@@ -24,6 +24,6 @@ public class MoveDataDto
     public int MoveId { get; set; }
     public int MovePower { get; set; }
     public int MoveAccuracy { get; set; }
-    public string MoveType { get; set; }
+    public TypesEnum MoveType { get; set; }
     public DamageClass MoveDamageClass { get; set; }
 }
