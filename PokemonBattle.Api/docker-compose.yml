@@ -1,0 +1,22 @@
+services:
+  db:
+    image: postgres:latest
+    container_name: pokebattle_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgresql762
+      POSTGRES_DB: PokeBattle
+    ports:
+      - "5432:5432"
+
+  api:
+    build: .
+    container_name: pokebattle_api
+    ports:
+      - "8080:8080" # Mapeia a 8080 do Windows para a 8080 do Container
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DbConnection=Host=db;Port=5432;Username=postgres;Password=postgresql762;Database=PokeBattle
+    depends_on:
+      - db
