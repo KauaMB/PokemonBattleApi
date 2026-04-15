@@ -1,4 +1,6 @@
 
+***
+
 **🇺🇸 Version: English**
 <div align="center">
 
@@ -15,6 +17,7 @@
   <a href="#-tech-stack">Tech Stack</a> •
   <a href="#-features">Features</a> •
   <a href="#-how-to-run">How to Run</a> •
+  <a href="#-api-documentation-swagger">API Docs</a> •
   <a href="#-português">Português</a>
 </p>
 
@@ -73,10 +76,44 @@ dotnet ef database update
 dotnet run
 ```
 
-### 🌐 Accessing the API (Swagger UI)
+### 🌐 Accessing the API
 Once the application is running, you can access the Swagger documentation via your browser:
 * **Running via Docker:** `http://localhost:8080/swagger`
 * **Running locally (`dotnet run`):** `http://localhost:5032/swagger` (or `https://localhost:7114/swagger`)
+
+---
+
+## 📖 API Documentation (Swagger)
+
+The API features an interactive Swagger interface to easily visualize and test resources.
+
+<img width="880" height="621" alt="image" src="https://github.com/user-attachments/assets/d273f470-4d97-4f84-a39f-dc30c8b4b52d" />
+
+
+### 📋 Endpoints Reference
+
+Below are the available endpoints for simulation and data retrieval:
+
+#### 📥 Database
+* **`POST /api/Database`**
+  * **Description:** Populates the PostgreSQL database. It fetches the 151 first-generation Pokémon and their moves directly from the external PokeAPI.
+  * **Important:** This must be executed before testing the other endpoints.
+
+#### 🐾 Pokemon
+* **`GET /api/Pokemon/{identifier}`**
+  * **Description:** Returns the complete data of a saved Pokémon, including base stats (HP, Attack, Defense, Speed) and its list of available moves.
+  * **Parameters:** Accepts either the numeric `id` or the `name` of the Pokémon.
+
+#### ⚔️ Battle
+* **`POST /api/Battle/battle-simulation`**
+  * **Description:** The core of the application. Receives two Pokémon and simulates a full turn-based battle. It returns a detailed log of each action, calculated damages based on stats, type advantages, critical hits, and ultimately the winner.
+  * **Request Example:**
+    ```json
+    {
+      "pokemon1": "pikachu",
+      "pokemon2": "gengar"
+    }
+    ```
 
 ---
 
@@ -96,7 +133,8 @@ Once the application is running, you can access the Swagger documentation via yo
   <a href="#-sobre-o-projeto">Sobre</a> •
   <a href="#-tecnologias">Tecnologias</a> •
   <a href="#-funcionalidades">Funcionalidades</a> •
-  <a href="#-como-executar">Como Executar</a>
+  <a href="#-como-executar">Como Executar</a> •
+  <a href="#-documentação-da-api-swagger">Docs da API</a>
 </p>
 
 ---
@@ -154,7 +192,41 @@ dotnet ef database update
 dotnet run
 ```
 
-### 🌐 Acessando a API (Swagger UI)
+### 🌐 Acessando a API
 Com a aplicação em execução, você pode acessar a documentação do Swagger pelo navegador:
 * **Rodando via Docker:** `http://localhost:8080/swagger`
 * **Rodando localmente (`dotnet run`):** `http://localhost:5032/swagger` (ou `https://localhost:7114/swagger`)
+
+---
+
+## 📖 Documentação da API (Swagger)
+
+A API possui uma interface interativa do Swagger para visualizar e testar os recursos facilmente.
+
+<img width="880" height="621" alt="image" src="https://github.com/user-attachments/assets/39f9103a-0a18-48de-a9f5-30c05a054258" />
+
+
+### 📋 Referência de Endpoints
+
+Abaixo estão os endpoints disponíveis para simulação e consulta:
+
+#### 📥 Database
+* **`POST /api/Database`**
+  * **Descrição:** Popula o banco de dados PostgreSQL. Faz o *fetch* dos 151 Pokémons da primeira geração e seus movimentos diretamente da PokeAPI externa.
+  * **Importante:** Deve ser executado antes de testar os outros endpoints.
+
+#### 🐾 Pokemon
+* **`GET /api/Pokemon/{identifier}`**
+  * **Descrição:** Retorna os dados completos de um Pokémon salvo no banco, incluindo seus status base (HP, Attack, Defense, Speed, etc.) e a lista de ataques disponíveis.
+  * **Parâmetros:** Aceita tanto o `id` numérico quanto o `name` (nome) do Pokémon.
+
+#### ⚔️ Battle
+* **`POST /api/Battle/battle-simulation`**
+  * **Descrição:** O núcleo da aplicação. Recebe dois Pokémons e simula uma batalha completa em turnos. Retorna um log detalhado de cada ação, danos calculados com base nos status, vantagens de tipo, acertos críticos e, por fim, o vencedor.
+  * **Exemplo de Requisição:**
+    ```json
+    {
+      "pokemon1": "pikachu",
+      "pokemon2": "gengar"
+    }
+    ```
