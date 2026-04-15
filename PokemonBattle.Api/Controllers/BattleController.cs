@@ -20,10 +20,16 @@ namespace PokemonBattle.Api.Controllers
         [HttpPost("battle-simulation")]
         public async Task<ActionResult> BattleSimulator([FromBody]BattleRequestDto battleRequest)
         {
+            try {
             var p1 = battleRequest.Pokemon1;
             var p2 = battleRequest.Pokemon2;
 
             return Ok(await battleService.SimulateBattle(p1, p2));
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
         }
     }
 }

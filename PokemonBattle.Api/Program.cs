@@ -22,7 +22,7 @@ builder.Services.AddScoped<IPokemonService, PokemonService>();
 
 builder.Services.AddScoped<IBattleService, BattleService>();
 
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite("Data Source = PokeBattle.db"));
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DbConnection")));
 
 var app = builder.Build();
 

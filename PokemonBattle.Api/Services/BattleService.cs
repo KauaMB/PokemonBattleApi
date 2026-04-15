@@ -5,7 +5,6 @@ using PokemonBattle.Api.Dtos;
 using PokemonBattle.Api.Enums;
 using PokemonBattle.Api.Models;
 using PokemonBattle.Api.Services;
-using SQLitePCL;
 
 namespace PokemonBattle.Api.Services;
 

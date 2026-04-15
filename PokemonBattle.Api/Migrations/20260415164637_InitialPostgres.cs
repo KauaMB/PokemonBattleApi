@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace PokemonBattle.Api.Migrations
 {
     /// <inheritdoc />
-    public partial class Initialmigration : Migration
+    public partial class InitialPostgres : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,13 +15,13 @@ namespace PokemonBattle.Api.Migrations
                 name: "Moves",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Type = table.Column<string>(type: "TEXT", nullable: false),
-                    Power = table.Column<int>(type: "INTEGER", nullable: true),
-                    Accuracy = table.Column<int>(type: "INTEGER", nullable: true),
-                    _damageClass = table.Column<string>(type: "TEXT", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Type = table.Column<string>(type: "text", nullable: false),
+                    Power = table.Column<int>(type: "integer", nullable: true),
+                    Accuracy = table.Column<int>(type: "integer", nullable: true),
+                    _damageClass = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -31,16 +32,16 @@ namespace PokemonBattle.Api.Migrations
                 name: "Pokemons",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    MaxHP = table.Column<int>(type: "INTEGER", nullable: false),
-                    Attack = table.Column<int>(type: "INTEGER", nullable: false),
-                    Defense = table.Column<int>(type: "INTEGER", nullable: false),
-                    SpecialAttack = table.Column<int>(type: "INTEGER", nullable: false),
-                    SpecialDefense = table.Column<int>(type: "INTEGER", nullable: false),
-                    Speed = table.Column<int>(type: "INTEGER", nullable: false),
-                    Types = table.Column<string>(type: "TEXT", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    MaxHP = table.Column<int>(type: "integer", nullable: false),
+                    Attack = table.Column<int>(type: "integer", nullable: false),
+                    Defense = table.Column<int>(type: "integer", nullable: false),
+                    SpecialAttack = table.Column<int>(type: "integer", nullable: false),
+                    SpecialDefense = table.Column<int>(type: "integer", nullable: false),
+                    Speed = table.Column<int>(type: "integer", nullable: false),
+                    Types = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -51,8 +52,8 @@ namespace PokemonBattle.Api.Migrations
                 name: "MovePokemon",
                 columns: table => new
                 {
-                    LearnedById = table.Column<int>(type: "INTEGER", nullable: false),
-                    MovesId = table.Column<int>(type: "INTEGER", nullable: false)
+                    LearnedById = table.Column<int>(type: "integer", nullable: false),
+                    MovesId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {

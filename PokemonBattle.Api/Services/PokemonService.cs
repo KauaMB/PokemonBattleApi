@@ -38,6 +38,7 @@ public class PokemonService : IPokemonService
         {
             Name = pokemon.Name,
             Id = pokemon.Id,
+            MaxHp = pokemon.MaxHP,
             Hp = pokemon.MaxHP,
             Attack = pokemon.Attack,
             SpecialAttack = pokemon.SpecialAttack,
